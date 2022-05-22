@@ -24,6 +24,7 @@ class Graph {
 
 public:
     Graph(int nodes, bool dir = false);
+    Graph();
     void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
     void dfs(int v);
     void bfs(int v);

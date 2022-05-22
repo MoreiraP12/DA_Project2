@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
-project(DA_First_Project)
+project(DA_PROJ2)
 
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(src)
 
-add_executable(DA_First_Project
+add_executable(DA_PROJ2
         main.cpp
         src/data.cpp
         src/data.h
@@ -16,4 +16,4 @@ add_executable(DA_First_Project
         src/menu.cpp
         src/menu.h
         src/utils.cpp
-        src/utils.h src/exceptions.cpp src/exceptions.h)
+        src/utils.h src/exceptions.cpp src/exceptions.h src/manager.cpp src/manager.h)

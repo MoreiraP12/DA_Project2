@@ -1,5 +1,5 @@
-#ifndef AED_PROJ1_INPUT_H
-#define AED_PROJ1_INPUT_H
+#ifndef DA_PROJ2_INPUT_H
+#define DA_PROJ2_INPUT_H
 
 
 #include <string>
@@ -64,4 +64,4 @@ namespace input {
 
 }
 
-#endif //AED_PROJ1_INPUT_H
+#endif

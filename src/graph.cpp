@@ -20,7 +20,8 @@ void Graph::dfs(int v) {
 }
 
 void Graph::bfs(int v) {
-    for (int i = 1; i <= n; v++) nodes[i].visited = false;
+    cout << "Teste" << endl;
+    for (int i = 1; i <= n; i++) nodes[i].visited = false;
     queue<int> q; // queue of unvisited nodes
     q.push(v);
     nodes[v].visited = true;
@@ -37,3 +38,5 @@ void Graph::bfs(int v) {
         }
     }
 }
+
+Graph::Graph(): nodes(0), hasDir(false){}

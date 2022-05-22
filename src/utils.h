@@ -2,8 +2,8 @@
 #include <string>
 #include <cmath>
 
-#ifndef DA_FIRST_PROJECT_UTILS_H
-#define DA_FIRST_PROJECT_UTILS_H
+#ifndef DA_PROJ2_UTILS_H
+#define DA_PROJ2_UTILS_H
 /**
  * clear the screen
  */

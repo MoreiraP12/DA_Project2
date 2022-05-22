@@ -1,5 +1,5 @@
-#ifndef DA_FIRST_PROJECT_DATA_H
-#define DA_FIRST_PROJECT_DATA_H
+#ifndef DA_PROJ2_DATA_H
+#define DA_PROJ2_DATA_H
 
 #include <string>
 #include "graph.h"
@@ -12,4 +12,4 @@ public:
 };
 
 
-#endif //DA_FIRST_PROJECT_DATA_H
+#endif

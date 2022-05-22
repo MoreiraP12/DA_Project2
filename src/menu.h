@@ -1,8 +1,11 @@
 #include <iostream>
 #include <vector>
+#include "graph.h"
 #include "input.h"
-#include "platform.h"
 #include "utils.h"
+#include "manager.h"
+#include "data.h"
+#include "exceptions.h"
 #include <chrono>
 
 using namespace std;
@@ -16,9 +19,9 @@ using namespace std;
 class Menu{
 
 protected:
-    static bool day;
-    static bool scenario3;
-    static Platform platform;
+    static Manager manager;
+    static Data data;
+    static bool routesLoaded;
     Menu * invalidOption();
 public:
     explicit Menu(){};
@@ -47,5 +50,16 @@ public:
     Menu * getNextMenu() override;
 };
 
+class LoadRoutes : public Menu {
+public:
+    explicit LoadRoutes():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
 
-
+class DisplayRoutes : public Menu {
+public:
+    explicit DisplayRoutes():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};

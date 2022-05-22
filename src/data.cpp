@@ -6,7 +6,7 @@ Data::Data(){
 }
 
 Graph Data::loadGraph(unsigned int numberFile) {
-    string filename = "in";
+    string filename = "../dataset/in";
 
     if(numberFile < 10)
         filename += to_string(0) + to_string(numberFile) + ".txt";
