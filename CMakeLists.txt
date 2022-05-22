@@ -7,4 +7,13 @@ include_directories(src)
 
 add_executable(DA_First_Project
         main.cpp
-        src/graph.cpp src/graph.h)
+        src/data.cpp
+        src/data.h
+        src/graph.cpp
+        src/graph.h
+        src/input.cpp
+        src/input.h
+        src/menu.cpp
+        src/menu.h
+        src/utils.cpp
+        src/utils.h src/exceptions.cpp src/exceptions.h)

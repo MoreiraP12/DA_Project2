@@ -8,8 +8,9 @@ using namespace std;
 
 class Graph {
     struct Edge {
-        int dest;
-        int weight;
+        unsigned dest;
+        unsigned capacity;
+        unsigned duration;
     };
 
     struct Node {
@@ -23,7 +24,7 @@ class Graph {
 
 public:
     Graph(int nodes, bool dir = false);
-    void addEdge(int src, int dest, int weight = 1);
+    void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
     void dfs(int v);
     void bfs(int v);
     };
