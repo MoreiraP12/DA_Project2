@@ -21,7 +21,7 @@ class Menu{
 protected:
     static Manager manager;
     static Data data;
-    static bool routesLoaded;
+    static int routesLoaded;
     Menu * invalidOption();
 public:
     explicit Menu(){};

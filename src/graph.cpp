@@ -39,4 +39,5 @@ void Graph::bfs(int v) {
     }
 }
 
+
 Graph::Graph(): nodes(0), hasDir(false){}

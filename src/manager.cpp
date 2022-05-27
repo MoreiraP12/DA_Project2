@@ -12,6 +12,32 @@ void Manager::setGraph(Graph graph){
     routes = graph;
 }
 
-void Manager::displayGraph() {
-    routes.bfs(1);
+int Manager::scenario1_1() {
+    return 0;
 }
+
+int Manager::scenario1_2() {
+    return 0;
+}
+
+int Manager::scenario2_1() {
+    return 0;
+}
+
+int Manager::scenario2_2() {
+    return 0;
+}
+
+int Manager::scenario2_3() {
+    return 0;
+}
+
+int Manager::scenario2_4() {
+    return 0;
+}
+
+int Manager::scenario2_5() {
+    return 0;
+}
+
+

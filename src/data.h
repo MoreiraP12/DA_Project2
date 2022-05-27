@@ -8,7 +8,7 @@ using namespace std;
 class Data {
 public:
     Data();
-    Graph loadGraph(unsigned numberFile);
+    Graph loadGraph(int numberFile);
 };
 
 

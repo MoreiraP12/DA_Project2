@@ -10,7 +10,13 @@ private:
 public:
     Manager();
     void setGraph(Graph graph);
-    void displayGraph();
+    int scenario1_1();
+    int scenario1_2();
+    int scenario2_1();
+    int scenario2_2();
+    int scenario2_3();
+    int scenario2_4();
+    int scenario2_5();
 };
 
 

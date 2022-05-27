@@ -28,6 +28,7 @@ public:
     void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
     void dfs(int v);
     void bfs(int v);
+    int bfs(int s, int t);
     };
 
 

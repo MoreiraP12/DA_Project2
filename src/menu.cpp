@@ -3,7 +3,7 @@ using namespace std;
 
 Manager Menu::manager = Manager();
 Data Menu::data = Data();
-bool Menu::routesLoaded = false;
+int Menu::routesLoaded = -1;
 
 Menu * Menu::invalidOption() {
     cout << "Invalid option" << std::endl;
@@ -16,8 +16,18 @@ MainMenu::~MainMenu(){}
 void MainMenu::show() {
     clearScreen();
     cout << "-| Main Menu |- " << endl;
-    cout << "[1] Load Routes" << endl;
-    if(routesLoaded) cout << "[2] Display Routes" << endl;
+    if(routesLoaded > 0)
+        cout << "[File] " << routesLoaded << endl << endl;
+    cout << "[1] Load Routes" << endl << endl;
+    if(routesLoaded > 0){
+        cout << "[2] Scenario 1.1" << endl;
+        cout << "[3] Scenario 1.2" << endl;
+        cout << "[4] Scenario 2.1" << endl;
+        cout << "[5] Scenario 2.2" << endl;
+        cout << "[6] Scenario 2.3" << endl;
+        cout << "[7] Scenario 2.4" << endl;
+        cout << "[8] Scenario 2.5" << endl;
+    }
     cout << "[0] Exit" << endl;
 
 }
@@ -55,16 +65,14 @@ void LoadRoutes::show() {
 }
 
 Menu *LoadRoutes::getNextMenu() {
-    unsigned numberFile;
-    if(!input::get(numberFile)){
+    if(!input::get(routesLoaded)){
         return invalidOption();
     }
     try{
-        Graph graph = data.loadGraph(numberFile);
+        Graph graph = data.loadGraph(routesLoaded);
         manager.setGraph(graph);
-        routesLoaded = true;
     }catch(ExceptionFile exception){
-        routesLoaded = false;
+        routesLoaded = -1;
         cout << exception.what();
         input::waitEnter();
         return nullptr;
@@ -85,3 +93,4 @@ Menu *DisplayRoutes::getNextMenu() {
     input::waitEnter();
     return nullptr;
 }
+

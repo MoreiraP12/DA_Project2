@@ -5,10 +5,10 @@ Data::Data(){
 
 }
 
-Graph Data::loadGraph(unsigned int numberFile) {
+Graph Data::loadGraph(int numberFile) {
     string filename = "../dataset/in";
 
-    if(numberFile < 10)
+    if(numberFile < 10 && numberFile >= 0)
         filename += to_string(0) + to_string(numberFile) + ".txt";
     else
         filename += to_string(numberFile) + ".txt";
