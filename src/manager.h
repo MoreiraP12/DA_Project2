@@ -13,7 +13,7 @@ public:
     void setGraph(Graph graph);
     unsigned getNumNodes();
     void scenario1_1(int src, int dest);
-    int scenario1_2();
+    void scenario1_2(int src, int dest);
     int scenario2_1();
     int scenario2_2();
     int scenario2_3();

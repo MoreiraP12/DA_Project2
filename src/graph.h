@@ -18,6 +18,7 @@ class Graph {
     struct Edge {
         int dest;
         int capacity;
+        int residual;
         int duration;
     };
 
@@ -38,9 +39,11 @@ public:
     void addEdge(int src, int dest, int capacity, int duration);
     void dfs(int v);
     void bfs(int v);
+    void ffbfs(int s, int t);
     unsigned getNumNodes();
     Node getNode(int i);
     void maximumCapacityPath(unsigned src);
+    void maximumCapacity(unsigned groupSize, unsigned src, unsigned dest);
     stack<int> getPath(int src, int dest);
     };
 

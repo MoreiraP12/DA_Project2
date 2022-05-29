@@ -102,14 +102,14 @@ Menu *Scenario1_1::getNextMenu() {
     if(!input::get(origin)){
         return invalidOption();
     }
-    if(!(origin >= 1 && origin < manager.getNumNodes())){
+    if(!(origin >= 1 && origin <=    manager.getNumNodes())){
         return invalidOption();
     }
     cout << endl << "Destination? " << endl;
     if(!input::get(destination)){
         return invalidOption();
     }
-    if(!(destination >= 1 && destination < manager.getNumNodes()) || destination == origin){
+    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
         return invalidOption();
     }
 
@@ -121,10 +121,30 @@ Menu *Scenario1_1::getNextMenu() {
 // ---------------  Scenario 1.2 ---------------
 
 void Scenario1_2::show() {
-
+    clearScreen();
+    cout << "-| Scenario 1.2 |-" << endl;
+    cout << "[File] " << routesLoaded << endl << endl;
 }
 
 Menu *Scenario1_2::getNextMenu() {
+    int origin, destination;
+    cout << "Origin? " << endl;
+    if(!input::get(origin)){
+        return invalidOption();
+    }
+    if(!(origin >= 1 && origin <= manager.getNumNodes())){
+        return invalidOption();
+    }
+    cout << endl << "Destination? " << endl;
+    if(!input::get(destination)){
+        return invalidOption();
+    }
+    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
+        return invalidOption();
+    }
+
+    manager.scenario1_2(origin, destination);
+    input::waitEnter();
     return nullptr;
 }
 
