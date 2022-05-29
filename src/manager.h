@@ -3,6 +3,7 @@
 
 
 #include "graph.h"
+#include "maxHeap.h"
 
 class Manager {
 private:
@@ -10,7 +11,8 @@ private:
 public:
     Manager();
     void setGraph(Graph graph);
-    int scenario1_1();
+    unsigned getNumNodes();
+    void scenario1_1(int src, int dest);
     int scenario1_2();
     int scenario2_1();
     int scenario2_2();

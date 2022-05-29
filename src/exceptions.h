@@ -18,5 +18,10 @@ public:
     string what();
 };
 
+class NoPathAvailable: public exception{
+public:
+    NoPathAvailable()= default;
+};
+
 
 #endif

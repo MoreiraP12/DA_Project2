@@ -22,7 +22,7 @@ Graph Data::loadGraph(int numberFile) {
 
     Graph graph(numNodes, true);
     unsigned counter = 0;
-    unsigned src, dest, capacity, duration;
+    int src, dest, capacity, duration;
     while(counter < numEdges){
         file >> src >> dest >> capacity >> duration;
         graph.addEdge(src, dest, capacity, duration);

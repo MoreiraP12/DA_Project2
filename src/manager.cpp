@@ -12,8 +12,26 @@ void Manager::setGraph(Graph graph){
     routes = graph;
 }
 
-int Manager::scenario1_1() {
-    return 0;
+void Manager::scenario1_1(int src, int dest) {
+    stack<int> path;
+    try{
+        routes.maximumCapacityPath(src);
+        path = routes.getPath(src, dest);
+    }catch(NoPathAvailable& e){
+        cout << "No path available between " << src << " and " << dest << endl;
+        return;
+    }
+    cout << "Maximum Capacity: " << routes.getNode(dest).lot << endl;
+    cout << "Path: ";
+    while (!path.empty()){
+        cout << path.top() << "  ";
+        path.pop();
+    }
+    cout << endl;
+}
+
+unsigned Manager::getNumNodes() {
+    return routes.getNumNodes();
 }
 
 int Manager::scenario1_2() {

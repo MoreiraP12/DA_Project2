@@ -57,9 +57,52 @@ public:
     Menu * getNextMenu() override;
 };
 
-class DisplayRoutes : public Menu {
+class Scenario1_1 : public Menu {
 public:
-    explicit DisplayRoutes():Menu(){};
+    explicit Scenario1_1():Menu(){};
     void show() override;
     Menu * getNextMenu() override;
 };
+
+class Scenario1_2 : public Menu {
+public:
+    explicit Scenario1_2():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class Scenario2_1 : public Menu {
+public:
+    explicit Scenario2_1():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class Scenario2_2 : public Menu {
+public:
+    explicit Scenario2_2():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class Scenario2_3 : public Menu {
+public:
+    explicit Scenario2_3():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class Scenario2_4 : public Menu {
+public:
+    explicit Scenario2_4():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class Scenario2_5 : public Menu {
+public:
+    explicit Scenario2_5():Menu(){};
+    void show() override;
+    Menu * getNextMenu() override;
+};
+

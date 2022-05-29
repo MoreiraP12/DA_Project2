@@ -51,7 +51,13 @@ Menu * MainMenu::getNextMenu() {
             case 0:
                 return nullptr;
             case 1: return new LoadRoutes();
-            case 2: return new DisplayRoutes();
+            case 2: return new Scenario1_1();
+            case 3: return new Scenario1_2();
+            case 4: return new Scenario2_1();
+            case 5: return new Scenario2_2();
+            case 6: return new Scenario2_3();
+            case 7: return new Scenario2_4();
+            case 8: return new Scenario2_5();
             default: return nullptr;
         }
     }
@@ -82,15 +88,97 @@ Menu *LoadRoutes::getNextMenu() {
     return nullptr;
 }
 
-// ---------------  Display Routes ---------------
-void DisplayRoutes::show() {
+// ---------------  Scenario 1.1 ---------------
+
+void Scenario1_1::show() {
     clearScreen();
-    cout << "-| Display Routes |-" << endl;
+    cout << "-| Scenario 1.1 |-" << endl;
+    cout << "[File] " << routesLoaded << endl << endl;
 }
 
-Menu *DisplayRoutes::getNextMenu() {
-    manager.displayGraph();
+Menu *Scenario1_1::getNextMenu() {
+    int origin, destination;
+    cout << "Origin? " << endl;
+    if(!input::get(origin)){
+        return invalidOption();
+    }
+    if(!(origin >= 1 && origin < manager.getNumNodes())){
+        return invalidOption();
+    }
+    cout << endl << "Destination? " << endl;
+    if(!input::get(destination)){
+        return invalidOption();
+    }
+    if(!(destination >= 1 && destination < manager.getNumNodes()) || destination == origin){
+        return invalidOption();
+    }
+
+    manager.scenario1_1(origin, destination);
     input::waitEnter();
     return nullptr;
 }
 
+// ---------------  Scenario 1.2 ---------------
+
+void Scenario1_2::show() {
+
+}
+
+Menu *Scenario1_2::getNextMenu() {
+    return nullptr;
+}
+
+
+// ---------------  Scenario 2.1 ---------------
+
+void Scenario2_1::show() {
+
+}
+
+Menu *Scenario2_1::getNextMenu() {
+    return nullptr;
+}
+
+
+// ---------------  Scenario 2.2 ---------------
+
+void Scenario2_2::show() {
+
+}
+
+Menu *Scenario2_2::getNextMenu() {
+    return nullptr;
+}
+
+
+// ---------------  Scenario 2.3 ---------------
+
+void Scenario2_3::show() {
+
+}
+
+Menu *Scenario2_3::getNextMenu() {
+    return nullptr;
+}
+
+
+// ---------------  Scenario 2.4 ---------------
+
+void Scenario2_4::show() {
+
+}
+
+Menu *Scenario2_4::getNextMenu() {
+    return nullptr;
+}
+
+
+// ---------------  Scenario 2.5 ---------------
+
+void Scenario2_5::show() {
+
+}
+
+Menu *Scenario2_5::getNextMenu() {
+    return nullptr;
+}

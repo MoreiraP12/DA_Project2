@@ -4,31 +4,44 @@
 #include <list>
 #include <queue>
 #include <iostream>
+#include <limits.h>
+#include "maxHeap.h"
+#include <algorithm>
+#include <stack>
+#include "exceptions.h"
+
+#define INF (INT_MAX/2)
+
 using namespace std;
 
 class Graph {
     struct Edge {
-        unsigned dest;
-        unsigned capacity;
-        unsigned duration;
+        int dest;
+        int capacity;
+        int duration;
     };
 
     struct Node {
         list<Edge> adj;
         bool visited;
+        int parent;
+        int lot;
     };
 
-    int n;
+    unsigned n;
     bool hasDir;
     vector<Node> nodes;
 
 public:
-    Graph(int nodes, bool dir = false);
+    Graph(unsigned nodes, bool dir = false);
     Graph();
-    void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
+    void addEdge(int src, int dest, int capacity, int duration);
     void dfs(int v);
     void bfs(int v);
-    int bfs(int s, int t);
+    unsigned getNumNodes();
+    Node getNode(int i);
+    void maximumCapacityPath(unsigned src);
+    stack<int> getPath(int src, int dest);
     };
 
 

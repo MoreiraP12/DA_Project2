@@ -16,4 +16,4 @@ add_executable(DA_PROJ2
         src/menu.cpp
         src/menu.h
         src/utils.cpp
-        src/utils.h src/exceptions.cpp src/exceptions.h src/manager.cpp src/manager.h)
+        src/utils.h src/exceptions.cpp src/exceptions.h src/manager.cpp src/manager.h src/maxHeap.h)
