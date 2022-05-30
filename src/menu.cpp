@@ -97,7 +97,7 @@ void Scenario1_1::show() {
 }
 
 Menu *Scenario1_1::getNextMenu() {
-    int origin, destination;
+    unsigned origin, destination;
     cout << "Origin? " << endl;
     if(!input::get(origin)){
         return invalidOption();
@@ -127,7 +127,7 @@ void Scenario1_2::show() {
 }
 
 Menu *Scenario1_2::getNextMenu() {
-    int origin, destination;
+    unsigned origin, destination;
     cout << "Origin? " << endl;
     if(!input::get(origin)){
         return invalidOption();

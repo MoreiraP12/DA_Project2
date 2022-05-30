@@ -10,23 +10,23 @@
 #include <stack>
 #include "exceptions.h"
 
-#define INF (INT_MAX/2)
+#define INF (UINT32_MAX/2)
 
 using namespace std;
 
 class Graph {
     struct Edge {
-        int dest;
-        int capacity;
+        unsigned dest;
+        unsigned capacity;
+        unsigned duration;
         int residual;
-        int duration;
     };
 
     struct Node {
         list<Edge> adj;
         bool visited;
-        int parent;
-        int lot;
+        unsigned parent;
+        unsigned lot;
     };
 
     unsigned n;
@@ -36,16 +36,17 @@ class Graph {
 public:
     Graph(unsigned nodes, bool dir = false);
     Graph();
-    void addEdge(int src, int dest, int capacity, int duration);
-    void dfs(int v);
-    void bfs(int v);
-    void ffbfs(int s, int t);
-    unsigned getNumNodes();
-    Node getNode(int i);
+    void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
+    void dfs(unsigned v);
+    void bfs(unsigned v);
+    Node getNode(unsigned i);
     void maximumCapacityPath(unsigned src);
-    void maximumCapacity(unsigned groupSize, unsigned src, unsigned dest);
-    stack<int> getPath(int src, int dest);
-    };
+    unsigned getNumNodes();
+    stack<unsigned> getPath(unsigned src, unsigned dest);
+
+    //void maximumCapacity(unsigned groupSize, unsigned src, unsigned dest);
+    //void ffbfs(int s, int t);
+};
 
 
 #endif

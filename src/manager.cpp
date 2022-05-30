@@ -12,8 +12,8 @@ void Manager::setGraph(Graph graph){
     routes = graph;
 }
 
-void Manager::scenario1_1(int src, int dest) {
-    stack<int> path;
+void Manager::scenario1_1(unsigned src, unsigned dest) {
+    stack<unsigned> path;
     try{
         routes.maximumCapacityPath(src);
         path = routes.getPath(src, dest);
@@ -34,8 +34,8 @@ unsigned Manager::getNumNodes() {
     return routes.getNumNodes();
 }
 
-void Manager::scenario1_2(int src, int dest) {
-    stack<int> path;
+void Manager::scenario1_2(unsigned src, unsigned dest) {
+    stack<unsigned> path;
     try{
         routes.maximumCapacityPath(src);
         path = routes.getPath(src, dest);

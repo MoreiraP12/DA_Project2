@@ -3,14 +3,15 @@
 Graph::Graph(unsigned num, bool dir) : n(num), hasDir(dir), nodes(num + 1) {
 }
 
-void Graph::addEdge(int src, int dest, int capacity, int duration) {
+Graph::Graph() : nodes(0), hasDir(false) {}
+
+void Graph::addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration) {
     if (src < 1 || src > n || dest < 1 || dest > n) return;
     nodes[src].adj.push_back({dest, capacity, duration});
     if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
 }
 
-void Graph::dfs(int v) {
-    cout << v << " "; // show node order
+void Graph::dfs(unsigned v) {
     nodes[v].visited = true;
     for (auto e: nodes[v].adj) {
         int w = e.dest;
@@ -19,42 +20,40 @@ void Graph::dfs(int v) {
     }
 }
 
-void Graph::bfs(int v) {
-    for (int i = 1; i <= n; i++) {
+void Graph::bfs(unsigned v) {
+    for (unsigned i = 1; i <= n; i++) {
         nodes[i].visited = false;
-        nodes[i].parent = -1;
+        nodes[i].parent = 0;
         nodes[i].lot = INF;
 
     }
-    queue<int> q; // queue of unvisited nodes
+    queue<unsigned > q; // queue of unvisited nodes
     q.push(v);
     nodes[v].visited = true;
+
     while (!q.empty()) { // while there are still unvisited nodes
-        int u = q.front();
+        unsigned u = q.front();
         q.pop();
         for (auto e: nodes[u].adj) {
-            int w = e.dest;
+            unsigned w = e.dest;
             if (!nodes[w].visited) {
                 q.push(w);
                 nodes[w].visited = true;
                 nodes[w].parent = u;
-                nodes[w].lot = min(nodes[w].lot, e.capacity);
+                nodes[w].lot = min(nodes[u].lot, e.capacity);
             }
         }
     }
 }
 
-
-Graph::Graph() : nodes(0), hasDir(false) {}
-
 unsigned Graph::getNumNodes() {
     return n;
 }
 
-void Graph::maximumCapacityPath(unsigned int src) {
-    MaxHeap<int, int> heap(n - 1, -1);
+void Graph::maximumCapacityPath(unsigned src) {
+    MaxHeap<unsigned, unsigned> heap(n, 0);
     for (unsigned v = 1; v <= n; v++) {
-        nodes[v].parent = -1;
+        nodes[v].parent = 0;
         nodes[v].lot = 0;
         nodes[v].visited = false;
         heap.insert(v, 0);
@@ -62,7 +61,7 @@ void Graph::maximumCapacityPath(unsigned int src) {
     nodes[src].lot = INF;
     heap.increaseKey(src, nodes[src].lot);
     while (heap.getSize() != 0) {
-        int v = heap.removeMax();
+        unsigned v = heap.removeMax();
         for (auto w: nodes[v].adj) {
             if (min(nodes[v].lot, w.capacity) > nodes[w.dest].lot) {
                 nodes[w.dest].lot = min(nodes[v].lot, w.capacity);
@@ -73,24 +72,24 @@ void Graph::maximumCapacityPath(unsigned int src) {
     }
 }
 
-stack<int> Graph::getPath(int src, int dest) {
-    stack<int> path;
-    int current = dest;
+stack<unsigned> Graph::getPath(unsigned src, unsigned dest) {
+    stack<unsigned> path;
+    unsigned current = dest;
     while (current != src) {
         path.push(current);
         current = nodes[current].parent;
-        if (current == -1) throw NoPathAvailable();
+        if (current == 0) throw NoPathAvailable();
     }
     path.push(src);
     return path;
 }
 
-Graph::Node Graph::getNode(int i) {
+Graph::Node Graph::getNode(unsigned i) {
     return nodes[i];
 }
-
-void Graph::ffbfs(int s, int t) {
 /*
+void Graph::ffbfs(int s, int t) {
+
 
     queue<int> q;
     q.push(s);
@@ -109,7 +108,7 @@ void Graph::ffbfs(int s, int t) {
                 }
             }
         }
-    }*/
+    }
 }
 
 void Graph::maximumCapacity(unsigned groupSize, unsigned src, unsigned dest) {
@@ -122,5 +121,5 @@ void Graph::maximumCapacity(unsigned groupSize, unsigned src, unsigned dest) {
     ffbfs(src, dest);
 
 
-}
+}*/
 
