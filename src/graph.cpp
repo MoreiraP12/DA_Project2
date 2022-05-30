@@ -90,7 +90,7 @@ Graph::Node Graph::getNode(int i) {
 }
 
 void Graph::ffbfs(int s, int t) {
-
+/*
 
     queue<int> q;
     q.push(s);
@@ -102,12 +102,14 @@ void Graph::ffbfs(int s, int t) {
         for (int v = 0; v < n; v++) {
             if (nodes[v].visited == false) {
                 for(int i = 0; i < nodes[v].adj.size(); i++){
-                    //if()
+                    if(){
+
+                    }
                     //visited[v] = true;
                 }
             }
         }
-    }
+    }*/
 }
 
 void Graph::maximumCapacity(unsigned groupSize, unsigned src, unsigned dest) {
