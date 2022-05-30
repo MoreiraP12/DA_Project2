@@ -174,10 +174,30 @@ Menu *Scenario2_2::getNextMenu() {
 // ---------------  Scenario 2.3 ---------------
 
 void Scenario2_3::show() {
-
+    clearScreen();
+    cout << "-| Scenario 2.3 |-" << endl;
+    cout << "[File] " << routesLoaded << endl << endl;
 }
 
 Menu *Scenario2_3::getNextMenu() {
+    unsigned origin, destination;
+    cout << "Origin? " << endl;
+    if(!input::get(origin)){
+        return invalidOption();
+    }
+    if(!(origin >= 1 && origin <= manager.getNumNodes())){
+        return invalidOption();
+    }
+    cout << endl << "Destination? " << endl;
+    if(!input::get(destination)){
+        return invalidOption();
+    }
+    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
+        return invalidOption();
+    }
+
+    manager.scenario2_3(origin, destination);
+    input::waitEnter();
     return nullptr;
 }
 

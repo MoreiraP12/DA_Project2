@@ -19,7 +19,7 @@ class Graph {
         unsigned dest;
         unsigned capacity;
         unsigned duration;
-        int residual;
+        unsigned flow;
     };
 
     struct Node {
@@ -44,8 +44,8 @@ public:
     unsigned getNumNodes();
     stack<unsigned> getPath(unsigned src, unsigned dest);
 
-    //void maximumCapacity(unsigned groupSize, unsigned src, unsigned dest);
-    //void ffbfs(int s, int t);
+    int edmondsKarp(int source, int sink);
+    int ekbfs(int s, int t);
 };
 
 

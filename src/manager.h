@@ -14,9 +14,9 @@ public:
     unsigned getNumNodes();
     void scenario1_1(unsigned src, unsigned dest);
     void scenario1_2(unsigned src, unsigned dest);
-    int scenario2_1();
+    void scenario2_1(unsigned src, unsigned dest);
     int scenario2_2();
-    int scenario2_3();
+    void scenario2_3(unsigned src, unsigned dest);
     int scenario2_4();
     int scenario2_5();
 };

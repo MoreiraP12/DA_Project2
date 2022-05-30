@@ -72,16 +72,30 @@ void Manager::scenario1_2(unsigned src, unsigned dest) {
     cout << endl;
 }
 
-int Manager::scenario2_1() {
-    return 0;
+void Manager::scenario2_1(unsigned src, unsigned dest) {
+
 }
 
 int Manager::scenario2_2() {
     return 0;
 }
 
-int Manager::scenario2_3() {
-    return 0;
+void Manager::scenario2_3(unsigned src, unsigned dest) {
+    stack<unsigned> path;
+    try{
+        routes.edmondsKarp(src, dest);
+        path = routes.getPath(src, dest);
+    }catch(NoPathAvailable& e){
+        cout << "No path available between " << src << " and " << dest << endl;
+        return;
+    }
+    cout << "Maximum Capacity: " << routes.getNode(dest).lot << endl;
+    cout << "Path: ";
+    while (!path.empty()){
+        cout << path.top() << "  ";
+        path.pop();
+    }
+    cout << endl;
 }
 
 int Manager::scenario2_4() {

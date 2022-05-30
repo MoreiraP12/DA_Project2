@@ -87,39 +87,80 @@ stack<unsigned> Graph::getPath(unsigned src, unsigned dest) {
 Graph::Node Graph::getNode(unsigned i) {
     return nodes[i];
 }
-/*
-void Graph::ffbfs(int s, int t) {
 
-
+int Graph::ekbfs(int s, int t)//breadth first search
+{
     queue<int> q;
+    nodes[s].parent = -2;
     q.push(s);
+    //path_flow[s] = INF;
 
-    while (!q.empty()) {
+    while(!q.empty()) {
         int u = q.front();
         q.pop();
 
-        for (int v = 0; v < n; v++) {
-            if (nodes[v].visited == false) {
-                for(int i = 0; i < nodes[v].adj.size(); i++){
-                    if(){
-
+        for(auto i: nodes[u].adj) {
+            int v = i.dest;
+            if(nodes[v].parent == -1)
+            {
+                if(i.capacity - i.flow > 0)
+                {
+                    // update parent node
+                    nodes[v].parent = u;
+                    // check min residual edge capacity
+                    unsigned u_flow;
+                    for(auto k: nodes[nodes[u].parent].adj){
+                        if(k.dest == u){
+                            u_flow = k.flow;
+                            break;
+                        }
                     }
-                    //visited[v] = true;
+                    i.flow = min( u_flow,i.capacity - i.flow);
+                    // if bfs reach end node, then terminate
+                    if(v == u) return i.flow;
+
+                    // add future node to queue
+                    q.push(v);
                 }
             }
         }
     }
+    return 0;
 }
-
-void Graph::maximumCapacity(unsigned groupSize, unsigned src, unsigned dest) {
-
-    for (unsigned v = 1; v <= n; v++) {
-        nodes[v].lot = 0;
-        nodes[v].visited = false;
+int Graph::edmondsKarp(int source, int sink)
+{
+    int maxFlow = 0;
+    while(1) {
+        //ind an augmented path and max flow corresponding to it
+        int flow = ekbfs(source, sink);
+        // if no path available, flow will be 0
+        if(flow==0)
+            break;
+        int u = sink;
+        maxFlow += flow;
+        // we update the passed flow matrix
+        while(u != source)
+        {
+            int v = nodes[u].parent;
+            Edge i;
+            for( auto j: nodes[v].adj){
+                if(j.dest == u){
+                    j.flow += flow;
+                    i= j;
+                    break;
+                }
+            }
+            bool exists = false;
+            for(auto k: nodes[u].adj){
+                if(k.dest == v){
+                    k.flow -= flow;
+                    exists = true;
+                    break;
+                }
+            }
+            if(!exists) addEdge(u, v, i.capacity, 0);
+        }
     }
-
-    ffbfs(src, dest);
-
-
-}*/
+    return maxFlow;
+}
 
