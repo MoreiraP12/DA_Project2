@@ -90,6 +90,7 @@ Graph::Node Graph::getNode(unsigned i) {
 
 int Graph::ekbfs(int s, int t)//breadth first search
 {
+
     queue<int> q;
     nodes[s].parent = -2;
     q.push(s);
@@ -101,23 +102,30 @@ int Graph::ekbfs(int s, int t)//breadth first search
 
         for(auto i: nodes[u].adj) {
             int v = i.dest;
-            if(nodes[v].parent == -1)
+            if(nodes[v].parent == 0)
             {
                 if(i.capacity - i.flow > 0)
                 {
+                    nodes[v].visited = true;
                     // update parent node
                     nodes[v].parent = u;
                     // check min residual edge capacity
                     unsigned u_flow;
-                    for(auto k: nodes[nodes[u].parent].adj){
-                        if(k.dest == u){
-                            u_flow = k.flow;
-                            break;
-                        }
+                    if(u == s){
+                        i.flow = i.capacity - i.flow;
                     }
-                    i.flow = min( u_flow,i.capacity - i.flow);
+                    else{
+                        for(auto k: nodes[u].adj){
+                            if(k.dest == v){
+                                u_flow = k.flow;
+                                break;
+                            }
+                        }
+                        i.flow = min(u_flow,i.capacity - i.flow);
+                    }
+
                     // if bfs reach end node, then terminate
-                    if(v == u) return i.flow;
+                    if(v == t) return i.flow;
 
                     // add future node to queue
                     q.push(v);
@@ -129,6 +137,14 @@ int Graph::ekbfs(int s, int t)//breadth first search
 }
 int Graph::edmondsKarp(int source, int sink)
 {
+    for (unsigned v = 1; v <= n; v++) {
+        nodes[v].parent = 0;
+        nodes[v].lot = 0;
+        nodes[v].visited = false;
+        for(auto i: nodes[v].adj){
+            i.flow = 0;
+        }
+    }
     int maxFlow = 0;
     while(1) {
         //ind an augmented path and max flow corresponding to it
@@ -136,29 +152,18 @@ int Graph::edmondsKarp(int source, int sink)
         // if no path available, flow will be 0
         if(flow==0)
             break;
-        int u = sink;
         maxFlow += flow;
         // we update the passed flow matrix
-        while(u != source)
-        {
-            int v = nodes[u].parent;
-            Edge i;
-            for( auto j: nodes[v].adj){
-                if(j.dest == u){
-                    j.flow += flow;
-                    i= j;
-                    break;
+        for (unsigned v = 1; v <= n; v++) {
+            nodes[v].parent = 0;
+            nodes[v].lot = 0;
+            if(nodes[v].visited) {
+                for (auto i: nodes[v].adj) {
+                    if (nodes[i.dest].visited) {
+                        i.flow = flow;
+                    }
                 }
             }
-            bool exists = false;
-            for(auto k: nodes[u].adj){
-                if(k.dest == v){
-                    k.flow -= flow;
-                    exists = true;
-                    break;
-                }
-            }
-            if(!exists) addEdge(u, v, i.capacity, 0);
         }
     }
     return maxFlow;

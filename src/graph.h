@@ -25,7 +25,7 @@ class Graph {
     struct Node {
         list<Edge> adj;
         bool visited;
-        unsigned parent;
+        int parent;
         unsigned lot;
     };
 
