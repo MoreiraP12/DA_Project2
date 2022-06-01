@@ -29,7 +29,7 @@ class Graph {
         unsigned lot;
         unsigned degree;
 
-        unsigned earliestDep;
+        unsigned latestArr;
         unsigned earliestArr;
 
     };
