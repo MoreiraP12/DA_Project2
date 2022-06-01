@@ -27,9 +27,10 @@ class Graph {
         bool visited;
         unsigned parent;
         unsigned lot;
-        unsigned es;
         unsigned degree;
-        unsigned delay;
+
+        unsigned earliestDep;
+        unsigned earliestArr;
 
     };
 
@@ -47,7 +48,9 @@ public:
     void maximumCapacityPath(unsigned src);
     unsigned getNumNodes();
     stack<unsigned> getPath(unsigned src, unsigned dest);
-    unsigned cpmES();
+    unsigned cpm();
+    unsigned cpmDelay();
+    stack<unsigned> getNodesDelay(unsigned delay);
 
 
     int edmondsKarp(int source, int sink);

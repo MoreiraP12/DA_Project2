@@ -227,7 +227,9 @@ Menu *Scenario2_4::getNextMenu() {
         return invalidOption();
     }
 
-    cout << "ES: "  << manager.scenario2_4(data.loadGraph(12)) << endl;//TODO
+    Graph tempGraph = data.loadGraph(12);
+
+    manager.scenario2_4(tempGraph);
     input::waitEnter();
     return nullptr;
 }
@@ -236,9 +238,31 @@ Menu *Scenario2_4::getNextMenu() {
 // ---------------  Scenario 2.5 ---------------
 
 void Scenario2_5::show() {
-
+    clearScreen();
+    cout << "-| Scenario 2.4 |-" << endl;
+    cout << "[File] " << routesLoaded << endl << endl;
 }
 
 Menu *Scenario2_5::getNextMenu() {
+    unsigned origin, destination;
+    cout << "Origin? " << endl;
+    if(!input::get(origin)){
+        return invalidOption();
+    }
+    if(!(origin >= 1 && origin <= manager.getNumNodes())){
+        return invalidOption();
+    }
+    cout << endl << "Destination? " << endl;
+    if(!input::get(destination)){
+        return invalidOption();
+    }
+    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
+        return invalidOption();
+    }
+
+    Graph tempGraph = data.loadGraph(12);
+
+    manager.scenario2_5(tempGraph);
+    input::waitEnter();
     return nullptr;
 }

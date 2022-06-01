@@ -90,12 +90,20 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
 
 }
 
-int Manager::scenario2_4(Graph graph) {
-    return graph.cpmES();
+void Manager::scenario2_4(Graph graph) {
+    cout << "ES: " << graph.cpm() << endl;
 }
 
-int Manager::scenario2_5() {
-    return 0;
+void Manager::scenario2_5(Graph graph) {
+    unsigned delay = graph.cpmDelay();
+    stack<unsigned> stops = graph.getNodesDelay(delay);
+    cout << "Delay: " << delay << endl;
+    cout << "Stops: ";
+    while (!stops.empty()){
+        cout << stops.top() << " ";
+        stops.pop();
+    }
+    cout << endl;
 }
 
 

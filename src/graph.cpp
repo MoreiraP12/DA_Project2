@@ -169,12 +169,11 @@ int Graph::edmondsKarp(int source, int sink)
     return maxFlow;
 }
 
-unsigned Graph::cpmES() {
+unsigned Graph::cpm() {
     for(int v = 1; v <= n; v++){
-        nodes[v].es = 0;
+        nodes[v].earliestDep = 0;
         nodes[v].parent = 0;
         nodes[v].degree = 0;
-        nodes[v].delay = 0;
     }
 
     for(int v = 1; v <= n; v++){
@@ -188,25 +187,73 @@ unsigned Graph::cpmES() {
         if(nodes[v].degree == 0) s.push(v);
 
     unsigned durMin = 0;
-    unsigned vf = 0;
 
     while(!s.empty()){
         unsigned v = s.top(); s.pop();
-        if( durMin < (int) nodes[v].es){
-            durMin = nodes[v].es;
-            vf = v;
+        if( durMin < (int) nodes[v].earliestDep){
+            durMin = nodes[v].earliestDep;
         }
         for(auto w: nodes[v].adj){
-            if(nodes[w.dest].es < nodes[v].es + w.duration){
-                nodes[w.dest].es = nodes[v].es + w.duration;
+            if(nodes[w.dest].earliestDep < nodes[v].earliestDep + w.duration){
+                nodes[w.dest].earliestDep = nodes[v].earliestDep + w.duration;
                 nodes[w.dest].parent = v;
             }
             nodes[w.dest].degree--;
             if(nodes[w.dest].degree == 0)
                 s.push(w.dest);
         }
-
     }
     return durMin;
+}
+
+unsigned Graph::cpmDelay() {
+    for(int v = 1; v <= n; v++){
+        nodes[v].earliestDep = 0;
+        nodes[v].parent = 0;
+        nodes[v].degree = 0;
+        nodes[v].earliestArr = 0;
+    }
+
+    for(int v = 1; v <= n; v++){
+        for(auto e: nodes[v].adj){
+            nodes[e.dest].degree++;
+        }
+    }
+
+    stack<unsigned> s;
+    for(unsigned v = 1; v<=n;v++)
+        if(nodes[v].degree == 0) s.push(v);
+
+    unsigned delay = 0;
+
+    while(!s.empty()){
+        unsigned v = s.top(); s.pop();
+        delay = max(delay, nodes[v].earliestDep - nodes[v].earliestArr);
+        for(auto w: nodes[v].adj){
+            if(nodes[w.dest].earliestDep < nodes[v].earliestDep + w.duration){
+                nodes[w.dest].earliestDep = nodes[v].earliestDep + w.duration;
+                nodes[w.dest].parent = v;
+            }
+            if(nodes[w.dest].earliestArr == 0)
+                nodes[w.dest].earliestArr = nodes[v].earliestDep + w.duration;
+            else
+                nodes[w.dest].earliestArr = min(nodes[w.dest].earliestArr, nodes[v].earliestDep + w.duration);
+
+            nodes[w.dest].degree--;
+            if(nodes[w.dest].degree == 0)
+                s.push(w.dest);
+        }
+
+    }
+    return delay;
+}
+
+stack<unsigned> Graph::getNodesDelay(unsigned delay) {
+    stack<unsigned> result;
+    for(int i = 1; i <= n; i++){
+        if(nodes[i].earliestDep - nodes[i].earliestArr == delay)
+            result.push(i);
+    }
+    return result;
 }
 
