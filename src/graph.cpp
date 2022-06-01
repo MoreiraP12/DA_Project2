@@ -169,3 +169,44 @@ int Graph::edmondsKarp(int source, int sink)
     return maxFlow;
 }
 
+unsigned Graph::cpmES() {
+    for(int v = 1; v <= n; v++){
+        nodes[v].es = 0;
+        nodes[v].parent = 0;
+        nodes[v].degree = 0;
+        nodes[v].delay = 0;
+    }
+
+    for(int v = 1; v <= n; v++){
+        for(auto e: nodes[v].adj){
+            nodes[e.dest].degree++;
+        }
+    }
+
+    stack<unsigned> s;
+    for(unsigned v = 1; v<=n;v++)
+        if(nodes[v].degree == 0) s.push(v);
+
+    unsigned durMin = 0;
+    unsigned vf = 0;
+
+    while(!s.empty()){
+        unsigned v = s.top(); s.pop();
+        if( durMin < (int) nodes[v].es){
+            durMin = nodes[v].es;
+            vf = v;
+        }
+        for(auto w: nodes[v].adj){
+            if(nodes[w.dest].es < nodes[v].es + w.duration){
+                nodes[w.dest].es = nodes[v].es + w.duration;
+                nodes[w.dest].parent = v;
+            }
+            nodes[w.dest].degree--;
+            if(nodes[w.dest].degree == 0)
+                s.push(w.dest);
+        }
+
+    }
+    return durMin;
+}
+

@@ -90,8 +90,8 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
 
 }
 
-int Manager::scenario2_4() {
-    return 0;
+int Manager::scenario2_4(Graph graph) {
+    return graph.cpmES();
 }
 
 int Manager::scenario2_5() {

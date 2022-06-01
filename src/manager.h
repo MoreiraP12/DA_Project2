@@ -17,7 +17,7 @@ public:
     void scenario2_1(unsigned src, unsigned dest);
     int scenario2_2();
     void scenario2_3(unsigned src, unsigned dest);
-    int scenario2_4();
+    int scenario2_4(Graph graph);
     int scenario2_5();
 };
 

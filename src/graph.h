@@ -25,8 +25,12 @@ class Graph {
     struct Node {
         list<Edge> adj;
         bool visited;
-        int parent;
+        unsigned parent;
         unsigned lot;
+        unsigned es;
+        unsigned degree;
+        unsigned delay;
+
     };
 
     unsigned n;
@@ -43,6 +47,8 @@ public:
     void maximumCapacityPath(unsigned src);
     unsigned getNumNodes();
     stack<unsigned> getPath(unsigned src, unsigned dest);
+    unsigned cpmES();
+
 
     int edmondsKarp(int source, int sink);
     int ekbfs(int s, int t);
