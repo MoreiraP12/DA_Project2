@@ -9,6 +9,7 @@ void Graph::addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned dur
     if (src < 1 || src > n || dest < 1 || dest > n) return;
     nodes[src].adj.push_back({dest, capacity, duration});
     if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
+
 }
 
 void Graph::dfs(unsigned v) {
@@ -88,6 +89,96 @@ Graph::Node Graph::getNode(unsigned i) {
     return nodes[i];
 }
 
+bool Graph::ekbfs(Graph &rGraph, int s, int t)
+{
+    for(auto x: rGraph.nodes){
+        x.visited = false;
+    }
+    queue<int> q;
+    q.push(s);
+    rGraph.nodes[s].visited = true;
+    rGraph.nodes[s].parent = -1;
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+
+
+        for(Edge& edge: rGraph.nodes[u].adj){
+            if (rGraph.nodes[edge.dest].visited == false && edge.capacity - edge.flow > 0) {
+                q.push(edge.dest);
+                rGraph.nodes[edge.dest].parent = u;
+                rGraph.nodes[edge.dest].visited = true;
+            }
+            if(edge.dest == t){
+                return true;
+            }
+        }
+    }
+
+    return (rGraph.nodes[t].visited == true);
+}
+
+int Graph::edmondsKarp(int s, int t)
+{
+    int u, v;
+    Graph rGraph(n);
+    for (u = 1; u <= n; u++){
+        for(auto x: nodes[u].adj){
+            rGraph.addEdge(u, x.dest, x.capacity, x.duration);
+        }
+    }
+
+    for (u = 1; u <= n; u++){
+        rGraph.nodes[u].visited=false;
+        rGraph.nodes[u].parent=0;
+    }
+
+    int max_flow = 0;
+
+    // Updating the residual values of edges
+    while (ekbfs(rGraph, s, t)) {
+        unsigned path_flow = INT_MAX;
+
+        for (v = t; v != s; v = rGraph.nodes[v].parent) {
+            u = rGraph.nodes[v].parent;
+            for(Edge &x: rGraph.nodes[u].adj){
+                if(x.dest == v){
+                    path_flow = min(path_flow, x.capacity-x.flow);
+                }
+            }
+
+        }
+
+        for (v = t; v != s; v = rGraph.nodes[v].parent) {
+            u = rGraph.nodes[v].parent;
+            for(Edge& x: rGraph.nodes[u].adj){
+                if(x.dest == v){
+                    x.flow -= path_flow;
+                }
+            }
+            for(Edge& x: rGraph.nodes[v].adj){
+                if(x.dest == u){
+                    x.flow += path_flow;
+                }
+                else{
+                    rGraph.addEdge(v, u, path_flow, 0);
+                }
+            }
+
+        }
+
+        // Adding the path flows
+        max_flow += path_flow;
+        for (u = 1; u <= n; u++){
+            rGraph.nodes[u].visited=false;
+        }
+    }
+
+    return max_flow;
+}
+
+/*
 int Graph::ekbfs(int s, int t)//breadth first search
 {
 
@@ -154,18 +245,19 @@ int Graph::edmondsKarp(int source, int sink)
             break;
         maxFlow += flow;
         // we update the passed flow matrix
+ */
+/*       int k = sink;
+        while(k != source){
+            nodes[nodes[k].parent].adjflow = nodes[k].flow;
+            k = nodes[k].parent;
+        }
         for (unsigned v = 1; v <= n; v++) {
             nodes[v].parent = 0;
-            nodes[v].lot = 0;
-            if(nodes[v].visited) {
-                for (auto i: nodes[v].adj) {
-                    if (nodes[i.dest].visited) {
-                        i.flow = flow;
-                    }
-                }
-            }
-        }
+            nodes[v].visited = false;
+        }*//*
+
     }
     return maxFlow;
 }
+*/
 

@@ -19,7 +19,7 @@ class Graph {
         unsigned dest;
         unsigned capacity;
         unsigned duration;
-        unsigned flow;
+        unsigned flow = 0;
     };
 
     struct Node {
@@ -29,11 +29,12 @@ class Graph {
         unsigned lot;
     };
 
-    unsigned n;
     bool hasDir;
-    vector<Node> nodes;
+
 
 public:
+    unsigned n;
+    vector<Node> nodes;
     Graph(unsigned nodes, bool dir = false);
     Graph();
     void addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration);
@@ -44,8 +45,9 @@ public:
     unsigned getNumNodes();
     stack<unsigned> getPath(unsigned src, unsigned dest);
 
-    int edmondsKarp(int source, int sink);
+    int edmondsKarp(int s, int t);
     int ekbfs(int s, int t);
+    bool ekbfs(Graph &graph, int s, int t);
 };
 
 
