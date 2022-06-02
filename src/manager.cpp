@@ -72,8 +72,21 @@ void Manager::scenario1_2(unsigned src, unsigned dest) {
     cout << endl;
 }
 
-void Manager::scenario2_1(unsigned src, unsigned dest) {
-    return;
+void Manager::scenario2_1(unsigned src, unsigned dest, unsigned groupSize) {
+    stack<unsigned> path;
+    try{
+        Graph rGraph(routes.n);
+        int i = routes.fordFulkerson(rGraph, src, dest);
+        if(i < groupSize){
+            cout << "\nUnfortunately, we weren't able to accomodate your group!\nTry again with a group of less than " << i << " people and follow the path above. \n" << endl;
+        }
+        else{
+            cout << "\nWe can accomodate your group !!" << endl;
+        }
+    }catch(NoPathAvailable& e){
+        cout << "No path available between " << src << " and " << dest << endl;
+        return;
+    }
 }
 
 int Manager::scenario2_2() {
@@ -84,7 +97,7 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
     stack<unsigned> path;
     try{
         Graph rGraph(routes.n);
-        cout << "Max Group Size:" << routes.edmondsKarp(rGraph, src, dest) << endl;
+        cout << "Max Group Size:" << routes.fordFulkerson(rGraph, src, dest) << endl;
         path = rGraph.getPath(src, dest);
         while (!path.empty()){
             cout << path.top() << "  ";

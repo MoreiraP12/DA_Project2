@@ -118,7 +118,7 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
     return false;
 }
 
-int Graph::edmondsKarp(Graph& rGraph, int s, int t)
+int Graph::fordFulkerson(Graph& rGraph, int s, int t)
 {
     int u, v;
     for (u = 1; u <= n; u++){
@@ -170,6 +170,13 @@ int Graph::edmondsKarp(Graph& rGraph, int s, int t)
 
         // Adding the path flows
         max_flow += path_flow;
+        stack<unsigned> path;
+        path = rGraph.getPath(s, t);
+        while (!path.empty()){
+            cout << path.top() << "  ";
+            path.pop();
+        }
+        cout << endl;
         for (u = 1; u <= n; u++){
             rGraph.nodes[u].visited=false;
         }

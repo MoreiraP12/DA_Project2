@@ -51,7 +51,7 @@ public:
     unsigned cpm();
     unsigned cpmDelay();
     stack<unsigned> getNodesDelay(unsigned delay);
-    int edmondsKarp(Graph &rGraph, int s, int t);
+    int fordFulkerson(Graph &rGraph, int s, int t);
     bool ekbfs(Graph &rGraph, int s, int t);
 };
 
