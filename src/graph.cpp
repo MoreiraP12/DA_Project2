@@ -261,3 +261,91 @@ int Graph::edmondsKarp(int source, int sink)
 }
 */
 
+unsigned Graph::cpm() {
+    for(int v = 1; v <= n; v++){
+        nodes[v].latestArr = 0;
+        nodes[v].parent = 0;
+        nodes[v].degree = 0;
+    }
+
+    for(int v = 1; v <= n; v++){
+        for(auto e: nodes[v].adj){
+            nodes[e.dest].degree++;
+        }
+    }
+
+    stack<unsigned> s;
+    for(unsigned v = 1; v<=n;v++)
+        if(nodes[v].degree == 0) s.push(v);
+
+    unsigned durMin = 0;
+
+    while(!s.empty()){
+        unsigned v = s.top(); s.pop();
+        if( durMin < (int) nodes[v].latestArr){
+            durMin = nodes[v].latestArr;
+        }
+        for(auto w: nodes[v].adj){
+            if(nodes[w.dest].latestArr < nodes[v].latestArr + w.duration){
+                nodes[w.dest].latestArr = nodes[v].latestArr + w.duration;
+                nodes[w.dest].parent = v;
+            }
+            nodes[w.dest].degree--;
+            if(nodes[w.dest].degree == 0)
+                s.push(w.dest);
+        }
+    }
+    return durMin;
+}
+
+unsigned Graph::cpmDelay() {
+    for(int v = 1; v <= n; v++){
+        nodes[v].latestArr = 0;
+        nodes[v].parent = 0;
+        nodes[v].degree = 0;
+        nodes[v].earliestArr = 0;
+    }
+
+    for(int v = 1; v <= n; v++){
+        for(auto e: nodes[v].adj){
+            nodes[e.dest].degree++;
+        }
+    }
+
+    stack<unsigned> s;
+    for(unsigned v = 1; v<=n;v++)
+        if(nodes[v].degree == 0) s.push(v);
+
+    unsigned delay = 0;
+
+    while(!s.empty()){
+        unsigned v = s.top(); s.pop();
+        delay = max(delay, nodes[v].latestArr - nodes[v].earliestArr);
+        for(auto w: nodes[v].adj){
+            if(nodes[w.dest].latestArr < nodes[v].latestArr + w.duration){
+                nodes[w.dest].latestArr = nodes[v].latestArr + w.duration;
+                nodes[w.dest].parent = v;
+            }
+            if(nodes[w.dest].earliestArr == 0)
+                nodes[w.dest].earliestArr = nodes[v].latestArr + w.duration;
+            else
+                nodes[w.dest].earliestArr = min(nodes[w.dest].earliestArr, nodes[v].latestArr + w.duration);
+
+            nodes[w.dest].degree--;
+            if(nodes[w.dest].degree == 0)
+                s.push(w.dest);
+        }
+
+    }
+    return delay;
+}
+
+stack<unsigned> Graph::getNodesDelay(unsigned delay) {
+    stack<unsigned> result;
+    for(int i = 1; i <= n; i++){
+        if(nodes[i].latestArr - nodes[i].earliestArr == delay)
+            result.push(i);
+    }
+    return result;
+}
+
