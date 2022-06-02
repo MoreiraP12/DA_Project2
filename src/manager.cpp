@@ -83,8 +83,9 @@ int Manager::scenario2_2() {
 void Manager::scenario2_3(unsigned src, unsigned dest) {
     stack<unsigned> path;
     try{
-        cout << "Max Group Size:" << routes.edmondsKarp(src, dest) << endl;
-        path = routes.getPath(src, dest);
+        Graph rGraph(routes.n);
+        cout << "Max Group Size:" << routes.edmondsKarp(rGraph, src, dest) << endl;
+        path = rGraph.getPath(src, dest);
         while (!path.empty()){
             cout << path.top() << "  ";
             path.pop();

@@ -118,10 +118,9 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
     return false;
 }
 
-int Graph::edmondsKarp(int s, int t)
+int Graph::edmondsKarp(Graph& rGraph, int s, int t)
 {
     int u, v;
-    Graph rGraph(n);
     for (u = 1; u <= n; u++){
         for(auto x: nodes[u].adj){
             rGraph.addEdge(u, x.dest, x.capacity, x.duration);
@@ -178,89 +177,6 @@ int Graph::edmondsKarp(int s, int t)
 
     return max_flow;
 }
-
-/*
-int Graph::ekbfs(int s, int t)//breadth first search
-{
-
-    queue<int> q;
-    nodes[s].parent = -2;
-    q.push(s);
-    //path_flow[s] = INF;
-
-    while(!q.empty()) {
-        int u = q.front();
-        q.pop();
-
-        for(auto i: nodes[u].adj) {
-            int v = i.dest;
-            if(nodes[v].parent == 0)
-            {
-                if(i.capacity - i.flow > 0)
-                {
-                    nodes[v].visited = true;
-                    // update parent node
-                    nodes[v].parent = u;
-                    // check min residual edge capacity
-                    unsigned u_flow;
-                    if(u == s){
-                        i.flow = i.capacity - i.flow;
-                    }
-                    else{
-                        for(auto k: nodes[u].adj){
-                            if(k.dest == v){
-                                u_flow = k.flow;
-                                break;
-                            }
-                        }
-                        i.flow = min(u_flow,i.capacity - i.flow);
-                    }
-
-                    // if bfs reach end node, then terminate
-                    if(v == t) return i.flow;
-
-                    // add future node to queue
-                    q.push(v);
-                }
-            }
-        }
-    }
-    return 0;
-}
-int Graph::edmondsKarp(int source, int sink)
-{
-    for (unsigned v = 1; v <= n; v++) {
-        nodes[v].parent = 0;
-        nodes[v].lot = 0;
-        nodes[v].visited = false;
-        for(auto i: nodes[v].adj){
-            i.flow = 0;
-        }
-    }
-    int maxFlow = 0;
-    while(1) {
-        //ind an augmented path and max flow corresponding to it
-        int flow = ekbfs(source, sink);
-        // if no path available, flow will be 0
-        if(flow==0)
-            break;
-        maxFlow += flow;
-        // we update the passed flow matrix
- */
-/*       int k = sink;
-        while(k != source){
-            nodes[nodes[k].parent].adjflow = nodes[k].flow;
-            k = nodes[k].parent;
-        }
-        for (unsigned v = 1; v <= n; v++) {
-            nodes[v].parent = 0;
-            nodes[v].visited = false;
-        }*//*
-
-    }
-    return maxFlow;
-}
-*/
 
 unsigned Graph::cpm() {
     for(int v = 1; v <= n; v++){
