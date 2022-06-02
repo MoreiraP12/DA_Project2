@@ -197,6 +197,7 @@ Menu *Scenario2_3::getNextMenu() {
     }
 
     manager.scenario2_3(origin, destination);
+
     input::waitEnter();
     return nullptr;
 }

@@ -73,7 +73,7 @@ void Manager::scenario1_2(unsigned src, unsigned dest) {
 }
 
 void Manager::scenario2_1(unsigned src, unsigned dest) {
-
+    return;
 }
 
 int Manager::scenario2_2() {
@@ -81,8 +81,14 @@ int Manager::scenario2_2() {
 }
 
 void Manager::scenario2_3(unsigned src, unsigned dest) {
+    stack<unsigned> path;
     try{
         cout << "Max Group Size:" << routes.edmondsKarp(src, dest) << endl;
+        path = routes.getPath(src, dest);
+        while (!path.empty()){
+            cout << path.top() << "  ";
+            path.pop();
+        }
     }catch(NoPathAvailable& e){
         cout << "No path available between " << src << " and " << dest << endl;
         return;

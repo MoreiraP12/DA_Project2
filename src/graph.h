@@ -19,7 +19,6 @@ class Graph {
         unsigned dest;
         unsigned capacity;
         unsigned duration;
-        unsigned flow = 0;
     };
 
     struct Node {

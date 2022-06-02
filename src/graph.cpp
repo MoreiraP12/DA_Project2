@@ -8,7 +8,7 @@ Graph::Graph() : nodes(0), hasDir(false) {}
 void Graph::addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration) {
     if (src < 1 || src > n || dest < 1 || dest > n) return;
     nodes[src].adj.push_back({dest, capacity, duration});
-    if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
+    //if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
 
 }
 
@@ -103,9 +103,8 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
         int u = q.front();
         q.pop();
 
-
         for(Edge& edge: rGraph.nodes[u].adj){
-            if (rGraph.nodes[edge.dest].visited == false && edge.capacity - edge.flow > 0) {
+            if (rGraph.nodes[edge.dest].visited == false && edge.capacity > 0) {
                 q.push(edge.dest);
                 rGraph.nodes[edge.dest].parent = u;
                 rGraph.nodes[edge.dest].visited = true;
@@ -116,7 +115,7 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
         }
     }
 
-    return (rGraph.nodes[t].visited == true);
+    return false;
 }
 
 int Graph::edmondsKarp(int s, int t)
@@ -130,8 +129,8 @@ int Graph::edmondsKarp(int s, int t)
     }
 
     for (u = 1; u <= n; u++){
-        rGraph.nodes[u].visited=false;
-        rGraph.nodes[u].parent=0;
+        rGraph.nodes[u].visited = false;
+        rGraph.nodes[u].parent = 0;
     }
 
     int max_flow = 0;
@@ -139,27 +138,29 @@ int Graph::edmondsKarp(int s, int t)
     // Updating the residual values of edges
     while (ekbfs(rGraph, s, t)) {
         unsigned path_flow = INT_MAX;
-
         for (v = t; v != s; v = rGraph.nodes[v].parent) {
             u = rGraph.nodes[v].parent;
             for(Edge &x: rGraph.nodes[u].adj){
                 if(x.dest == v){
-                    path_flow = min(path_flow, x.capacity-x.flow);
+                    path_flow = min(path_flow, x.capacity);
                 }
             }
 
         }
 
+        if(path_flow == 0){
+            return max_flow;
+        }
         for (v = t; v != s; v = rGraph.nodes[v].parent) {
             u = rGraph.nodes[v].parent;
             for(Edge& x: rGraph.nodes[u].adj){
                 if(x.dest == v){
-                    x.flow -= path_flow;
+                    x.capacity -= path_flow;
                 }
             }
-            for(Edge& x: rGraph.nodes[v].adj){
-                if(x.dest == u){
-                    x.flow += path_flow;
+            for(Edge& j: rGraph.nodes[v].adj){
+                if(j.dest == u){
+                    j.capacity += path_flow;
                 }
                 else{
                     rGraph.addEdge(v, u, path_flow, 0);
