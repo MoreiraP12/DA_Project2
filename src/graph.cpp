@@ -1,4 +1,7 @@
 #include "graph.h"
+#include <vector>
+#include <algorithm>
+#include <iterator>
 
 Graph::Graph(unsigned num, bool dir) : n(num), hasDir(dir), nodes(num + 1) {
 }
@@ -133,6 +136,8 @@ int Graph::fordFulkerson(Graph& rGraph, int s, int t, bool change, vector<unsign
     }
 
     int max_flow = 0;
+    int common = 0;
+    vector<unsigned> tempVect;
 
     while (ekbfs(rGraph, s, t)) {
         unsigned path_flow = INT_MAX;
@@ -169,12 +174,28 @@ int Graph::fordFulkerson(Graph& rGraph, int s, int t, bool change, vector<unsign
 
         max_flow += path_flow;
         if(change){
+            vector<unsigned> tmp;
             stack<unsigned> path;
-            vector<unsigned> vect;
             path = rGraph.getPath(s, t);
             while (!path.empty()){
-                vect.push_back(path.top());
+                tmp.push_back(path.top());
                 path.pop();
+            }
+            // count the changes compared to the vector you have and check if their inferior to the current changes
+            sort(tmp.begin(), tmp.end());
+            sort(vect.begin(), vect.end());
+
+            vector<int> v_intersection;
+
+            set_intersection(
+                tmp.begin(), tmp.end(),
+                vect.begin(), vect.end(),
+                back_inserter(v_intersection)
+            );
+
+            if(common > v_intersection.size()) {
+                common = v_intersection.size() ;
+                tempVect = tmp;
             }
 
         }
@@ -191,8 +212,16 @@ int Graph::fordFulkerson(Graph& rGraph, int s, int t, bool change, vector<unsign
             rGraph.nodes[u].visited=false;
         }
     }
-
-    return max_flow;
+    if(change){
+        for(auto x: tempVect){
+            cout << x << "  ";
+        }
+        cout << "\n";
+        return common;
+    }
+    else{
+        return max_flow;
+    }
 }
 
 unsigned Graph::cpm() {
