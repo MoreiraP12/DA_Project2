@@ -51,7 +51,7 @@ public:
     unsigned cpm();
     unsigned cpmDelay();
     stack<unsigned> getNodesDelay(unsigned delay);
-    int fordFulkerson(Graph &rGraph, int s, int t);
+    int fordFulkerson(Graph &rGraph, int s, int t, bool change = false, vector<unsigned> vect = vector<unsigned>());
     bool ekbfs(Graph &rGraph, int s, int t);
 };
 

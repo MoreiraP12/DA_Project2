@@ -94,15 +94,10 @@ int Manager::scenario2_2() {
 }
 
 void Manager::scenario2_3(unsigned src, unsigned dest) {
-    stack<unsigned> path;
     try{
         Graph rGraph(routes.n);
-        cout << "Max Group Size:" << routes.fordFulkerson(rGraph, src, dest) << endl;
-        path = rGraph.getPath(src, dest);
-        while (!path.empty()){
-            cout << path.top() << "  ";
-            path.pop();
-        }
+        int i = routes.fordFulkerson(rGraph, src, dest);
+        cout << "Max Group Size: " << i << endl;
     }catch(NoPathAvailable& e){
         cout << "No path available between " << src << " and " << dest << endl;
         return;

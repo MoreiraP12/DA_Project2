@@ -8,7 +8,7 @@ Graph::Graph() : nodes(0), hasDir(false) {}
 void Graph::addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration) {
     if (src < 1 || src > n || dest < 1 || dest > n) return;
     nodes[src].adj.push_back({dest, capacity, duration});
-    //if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
+    if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
 
 }
 
@@ -118,7 +118,7 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
     return false;
 }
 
-int Graph::fordFulkerson(Graph& rGraph, int s, int t)
+int Graph::fordFulkerson(Graph& rGraph, int s, int t, bool change, vector<unsigned> vect)
 {
     int u, v;
     for (u = 1; u <= n; u++){
@@ -134,7 +134,6 @@ int Graph::fordFulkerson(Graph& rGraph, int s, int t)
 
     int max_flow = 0;
 
-    // Updating the residual values of edges
     while (ekbfs(rGraph, s, t)) {
         unsigned path_flow = INT_MAX;
         for (v = t; v != s; v = rGraph.nodes[v].parent) {
@@ -168,15 +167,26 @@ int Graph::fordFulkerson(Graph& rGraph, int s, int t)
 
         }
 
-        // Adding the path flows
         max_flow += path_flow;
-        stack<unsigned> path;
-        path = rGraph.getPath(s, t);
-        while (!path.empty()){
-            cout << path.top() << "  ";
-            path.pop();
+        if(change){
+            stack<unsigned> path;
+            vector<unsigned> vect;
+            path = rGraph.getPath(s, t);
+            while (!path.empty()){
+                vect.push_back(path.top());
+                path.pop();
+            }
+
         }
-        cout << endl;
+        else{
+            stack<unsigned> path;
+            path = rGraph.getPath(s, t);
+            while (!path.empty()){
+                cout << path.top() << "  ";
+                path.pop();
+            }
+            cout << endl;
+        }
         for (u = 1; u <= n; u++){
             rGraph.nodes[u].visited=false;
         }
