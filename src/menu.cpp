@@ -197,19 +197,23 @@ void Scenario2_2::show() {
 }
 
 Menu *Scenario2_2::getNextMenu() {
-    vector<unsigned> path;
-    unsigned pathElement;
-    cout << "Path " << endl;
-    if(!input::get(pathElement)){
-        return invalidOption();
+    string line;
+    vector<unsigned> numbers;
+    unsigned temp;
+
+    cout << "Enter some numbers: ";
+    getline(std::cin, line);
+
+    istringstream ss(line);
+
+    while (ss >> temp){
+        if(!input::get(temp)){
+            return invalidOption();
+        }
+        numbers.push_back(temp);
     }
 
-
-    if(path.size() < 1){
-        return invalidOption();
-    }
-
-    manager.scenario2_2(path);
+    manager.scenario2_2(numbers);
 
     input::waitEnter();
     return nullptr;
