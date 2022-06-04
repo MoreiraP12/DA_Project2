@@ -144,7 +144,6 @@ int Graph::edmondsKarp(Graph& rGraph, int s, int t)
                     path_flow = min(path_flow, x.capacity);
                 }
             }
-
         }
 
         if(path_flow == 0){
@@ -173,6 +172,13 @@ int Graph::edmondsKarp(Graph& rGraph, int s, int t)
         for (u = 1; u <= n; u++){
             rGraph.nodes[u].visited=false;
         }
+        stack<unsigned> path;
+        path = rGraph.getPath(s, t);
+        while (!path.empty()){
+            cout << path.top() << "  ";
+            path.pop();
+        }
+        cout << endl;
     }
 
     return max_flow;
