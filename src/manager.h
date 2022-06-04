@@ -15,7 +15,7 @@ public:
     void scenario1_1(unsigned src, unsigned dest);
     void scenario1_2(unsigned src, unsigned dest);
     void scenario2_1(unsigned src, unsigned dest, unsigned groupSize);
-    int scenario2_2();
+    void scenario2_2(vector<unsigned> path, unsigned groupSize, unsigned increment);
     void scenario2_3(unsigned src, unsigned dest);
     void scenario2_4(Graph graph);
     void scenario2_5(Graph graph);

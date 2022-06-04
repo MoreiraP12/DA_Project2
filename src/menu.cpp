@@ -189,10 +189,39 @@ Menu *Scenario2_1::getNextMenu() {
 // ---------------  Scenario 2.2 ---------------
 
 void Scenario2_2::show() {
-
+    clearScreen();
+    cout << "-| Scenario 2.2 |-" << endl;
+    cout << "[File] " << routesLoaded << endl << endl;
 }
 
 Menu *Scenario2_2::getNextMenu() {
+    string line;
+    vector<unsigned> numbers;
+    unsigned temp, groupSize, increment;
+
+    cout << "Group Size? " << endl;
+    if(!input::get(groupSize)){
+        return invalidOption();
+    }
+
+
+    cout << "Increment? " << endl;
+    if(!input::get(increment)){
+        return invalidOption();
+    }
+
+    cout << "Enter some numbers: ";
+    getline(std::cin, line);
+
+    istringstream ss(line);
+
+    while (ss >> temp){
+        numbers.push_back(temp);
+    }
+
+    manager.scenario2_2(numbers, groupSize, increment);
+
+    input::waitEnter();
     return nullptr;
 }
 

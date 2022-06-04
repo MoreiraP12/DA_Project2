@@ -118,12 +118,20 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
     return false;
 }
 
-int Graph::edmondsKarp(Graph& rGraph, int s, int t)
+int Graph::edmondsKarp(Graph& rGraph, int s, int t, vector<unsigned> path, int groupSize)
 {
     int u, v;
     for (u = 1; u <= n; u++){
         for(auto x: nodes[u].adj){
             rGraph.addEdge(u, x.dest, x.capacity, x.duration);
+        }
+    }
+
+    for(int i = 0; i < path.size(); i++){
+        for(auto edge: rGraph.nodes[path[i]].adj){
+            if(edge.dest == path[i+1]){
+                edge.capacity -= groupSize;
+            }
         }
     }
 

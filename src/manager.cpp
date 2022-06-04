@@ -72,7 +72,7 @@ void Manager::scenario1_2(unsigned src, unsigned dest) {
     cout << endl;
 }
 
-void Manager::scenario2_1(unsigned src, unsigned dest,  unsigned groupSize) {
+void Manager::scenario2_1(unsigned src, unsigned dest, unsigned groupSize) {
 
     try{
         Graph rGraph(routes.n);
@@ -90,8 +90,22 @@ void Manager::scenario2_1(unsigned src, unsigned dest,  unsigned groupSize) {
     };
 }
 
-int Manager::scenario2_2() {
-    return 0;
+void Manager::scenario2_2(vector<unsigned> path, unsigned groupSize, unsigned increment) {
+    try{
+        Graph rGraph(routes.n);
+        int i = routes.edmondsKarp(rGraph, path.front(), path.back(), path, groupSize);
+
+        if(i < groupSize + increment){
+            cout << "Unfortunately we cannot travel with more " << increment << " people." << endl;
+        }
+        else{
+            cout << "We can take up to : " << i << " more people!\n" << endl;
+        }
+
+    }catch(NoPathAvailable& e){
+        cout << "No path available between " << path.front() << " and " << path.back() << endl;
+        return;
+    }
 }
 
 void Manager::scenario2_3(unsigned src, unsigned dest) {
