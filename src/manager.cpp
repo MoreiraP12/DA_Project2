@@ -122,11 +122,12 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
 
 }
 
+
 void Manager::scenario2_4(Graph graph) {
     Graph rGraph(routes.n);
-    routes.edmondsKarp(rGraph,1, graph.getNumNodes());
+    routes.edmondsKarp(rGraph,1, rGraph.getNumNodes());
     graph.nodes.push_back(rGraph.nodes[0]);
-    for(int i = 1; i < rGraph.n; i++){
+    for(int i = 1; i <= rGraph.n; i++){
         if(rGraph.nodes[i].parent != 0){
             graph.nodes.push_back(rGraph.nodes[i]);
             for(auto edge: rGraph.nodes[i].adj){
@@ -143,9 +144,9 @@ void Manager::scenario2_4(Graph graph) {
 
 void Manager::scenario2_5(Graph graph) {
     Graph rGraph(routes.n);
-    routes.edmondsKarp(rGraph,1, graph.getNumNodes());
+    routes.edmondsKarp(rGraph,1, rGraph.getNumNodes());
     graph.nodes.push_back(rGraph.nodes[0]);
-    for(int i = 1; i < rGraph.n; i++){
+    for(int i = 1; i <= rGraph.n; i++){
         if(rGraph.nodes[i].parent != 0){
             graph.nodes.push_back(rGraph.nodes[i]);
             for(auto edge: rGraph.nodes[i].adj){
