@@ -3,12 +3,11 @@
 Graph::Graph(unsigned num, bool dir) : n(num), hasDir(dir), nodes(num + 1) {
 }
 
-Graph::Graph() : nodes(0), hasDir(false) {}
+Graph::Graph() : nodes(0), hasDir(true) {}
 
 void Graph::addEdge(unsigned src, unsigned dest, unsigned capacity, unsigned duration) {
     if (src < 1 || src > n || dest < 1 || dest > n) return;
     nodes[src].adj.push_back({dest, capacity, duration});
-    //if (!hasDir) nodes[dest].adj.push_back({src, capacity, duration});
 
 }
 
@@ -89,7 +88,7 @@ Graph::Node Graph::getNode(unsigned i) {
     return nodes[i];
 }
 
-bool Graph::ekbfs(Graph &rGraph, int s, int t)
+bool Graph::auxbfs(Graph &rGraph, int s, int t)
 {
     for(auto x: rGraph.nodes){
         x.visited = false;
@@ -104,21 +103,22 @@ bool Graph::ekbfs(Graph &rGraph, int s, int t)
         q.pop();
 
         for(Edge& edge: rGraph.nodes[u].adj){
-            if (rGraph.nodes[edge.dest].visited == false && edge.capacity > 0) {
+            if (rGraph.nodes[edge.dest].visited  == false && edge.capacity > 0) {
                 q.push(edge.dest);
                 rGraph.nodes[edge.dest].parent = u;
                 rGraph.nodes[edge.dest].visited = true;
+                if(edge.dest == t){
+                    return true;
+                }
             }
-            if(edge.dest == t){
-                return true;
-            }
+
         }
     }
 
     return false;
 }
 
-int Graph::edmondsKarp(Graph& rGraph, int s, int t, vector<unsigned> path, int groupSize)
+int Graph::fordFulkerson(Graph& rGraph, int s, int t, vector<unsigned> path, int groupSize)
 {
     int u, v;
     for (u = 1; u <= n; u++){
@@ -143,7 +143,7 @@ int Graph::edmondsKarp(Graph& rGraph, int s, int t, vector<unsigned> path, int g
     int max_flow = 0;
 
     // Updating the residual values of edges
-    while (ekbfs(rGraph, s, t)) {
+    while (auxbfs(rGraph, s, t)) {
         unsigned path_flow = INT_MAX;
         for (v = t; v != s; v = rGraph.nodes[v].parent) {
             u = rGraph.nodes[v].parent;
@@ -186,7 +186,7 @@ int Graph::edmondsKarp(Graph& rGraph, int s, int t, vector<unsigned> path, int g
             cout << path.top() << "  ";
             path.pop();
         }
-        cout << endl;
+        cout << "Pathflow: " << path_flow << endl;
     }
 
     return max_flow;

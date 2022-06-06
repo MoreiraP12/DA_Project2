@@ -76,7 +76,7 @@ void Manager::scenario2_1(unsigned src, unsigned dest, unsigned groupSize) {
 
     try{
         Graph rGraph(routes.n);
-        int i =  routes.edmondsKarp(rGraph, src, dest);
+        int i = routes.fordFulkerson(rGraph, src, dest);
         if(i >= groupSize){
             cout << "Fantastic!!\nWe can fit your group in this path. " << endl;
         }
@@ -93,7 +93,7 @@ void Manager::scenario2_1(unsigned src, unsigned dest, unsigned groupSize) {
 void Manager::scenario2_2(vector<unsigned> path, unsigned groupSize, unsigned increment) {
     try{
         Graph rGraph(routes.n);
-        int i = routes.edmondsKarp(rGraph, path.front(), path.back(), path, groupSize);
+        int i = routes.fordFulkerson(rGraph, path.front(), path.back(), path, groupSize);
 
         if(i < groupSize + increment){
             cout << "Unfortunately we cannot travel with more " << increment << " people." << endl;
@@ -112,7 +112,7 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
     stack<unsigned> path;
     try{
         Graph rGraph(routes.n);
-        int i = routes.edmondsKarp(rGraph, src, dest);
+        int i = routes.fordFulkerson(rGraph, src, dest);
         cout << "Max Group Size:" << i << endl;
 
     }catch(NoPathAvailable& e){
