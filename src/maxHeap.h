@@ -12,6 +12,11 @@ using namespace std;
 
 
 template <class K, class V>
+/**
+ * Useful to implement algorithms for scenario 1.1 in order to find the edge with the highest capacity
+ * @tparam K
+ * @tparam V
+ */
 class MaxHeap {
     struct Node {
         K key;

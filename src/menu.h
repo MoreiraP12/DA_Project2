@@ -50,6 +50,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu encharged of loading the files to a usable data structure
+ */
 class LoadRoutes : public Menu {
 public:
     explicit LoadRoutes():Menu(){};
@@ -57,6 +60,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 1.1 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario1_1 : public Menu {
 public:
     explicit Scenario1_1():Menu(){};
@@ -64,6 +70,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 1.2 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario1_2 : public Menu {
 public:
     explicit Scenario1_2():Menu(){};
@@ -71,13 +80,18 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 2.1 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario2_1 : public Menu {
 public:
     explicit Scenario2_1():Menu(){};
     void show() override;
     Menu * getNextMenu() override;
 };
-
+/**
+ * Menu relevant to the exercise 2.2 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario2_2 : public Menu {
 public:
     explicit Scenario2_2():Menu(){};
@@ -85,6 +99,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 2.3 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario2_3 : public Menu {
 public:
     explicit Scenario2_3():Menu(){};
@@ -92,6 +109,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 2.4 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario2_4 : public Menu {
 public:
     explicit Scenario2_4():Menu(){};
@@ -99,6 +119,9 @@ public:
     Menu * getNextMenu() override;
 };
 
+/**
+ * Menu relevant to the exercise 2.5 where the need functions from manager.h are called and the needed arguments are fetched from the user
+ */
 class Scenario2_5 : public Menu {
 public:
     explicit Scenario2_5():Menu(){};

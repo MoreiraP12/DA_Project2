@@ -9,7 +9,9 @@
 #include <string>
 
 using namespace std;
-
+/**
+ * Unable to read file or any error related to the file
+ */
 class  ExceptionFile: public exception{
 private:
     string filename;
@@ -17,7 +19,9 @@ public:
     explicit ExceptionFile(string filename);
     string what();
 };
-
+/**
+ * No path is available from a certain source to a destination
+ */
 class NoPathAvailable: public exception{
 public:
     NoPathAvailable()= default;
