@@ -1,0 +1,6 @@
+<map id="Scenario1_2" name="Scenario1_2">
+<area shape="rect" id="node1" title=" " alt="" coords="26,171,121,197"/>
+<area shape="rect" id="node2" href="$class_menu.html" title=" " alt="" coords="46,95,101,121"/>
+<area shape="rect" id="node3" href="$class_data.html" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node4" href="$class_manager.html" title=" " alt="" coords="80,5,152,32"/>
+</map>

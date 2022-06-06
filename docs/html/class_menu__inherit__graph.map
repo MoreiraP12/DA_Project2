@@ -1,0 +1,12 @@
+<map id="Menu" name="Menu">
+<area shape="rect" id="node1" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" id="node2" href="$class_load_routes.html" title=" " alt="" coords="109,5,201,32"/>
+<area shape="rect" id="node3" href="$class_main_menu.html" title=" " alt="" coords="114,56,197,83"/>
+<area shape="rect" id="node4" href="$class_scenario1__1.html" title=" " alt="" coords="108,107,203,133"/>
+<area shape="rect" id="node5" href="$class_scenario1__2.html" title=" " alt="" coords="108,157,203,184"/>
+<area shape="rect" id="node6" href="$class_scenario2__1.html" title=" " alt="" coords="108,208,203,235"/>
+<area shape="rect" id="node7" href="$class_scenario2__2.html" title=" " alt="" coords="108,259,203,285"/>
+<area shape="rect" id="node8" href="$class_scenario2__3.html" title=" " alt="" coords="108,309,203,336"/>
+<area shape="rect" id="node9" href="$class_scenario2__4.html" title=" " alt="" coords="108,360,203,387"/>
+<area shape="rect" id="node10" href="$class_scenario2__5.html" title=" " alt="" coords="108,411,203,437"/>
+</map>
