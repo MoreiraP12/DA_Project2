@@ -9,9 +9,9 @@ Graph Data::loadGraph(int numberFile) {
     string filename = "../dataset/in";
 
     if(numberFile < 10 && numberFile >= 0)
-        filename += to_string(0) + to_string(numberFile) + ".txt";
+        filename += to_string(0) + to_string(numberFile) + "_b.txt";
     else
-        filename += to_string(numberFile) + ".txt";
+        filename += to_string(numberFile) + "_b.txt";
 
     ifstream file;
     file.open(filename);
