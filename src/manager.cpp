@@ -123,16 +123,45 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
 }
 
 void Manager::scenario2_4(Graph graph) {
+    Graph rGraph(routes.n);
+    routes.edmondsKarp(rGraph,1, graph.getNumNodes());
+    graph.nodes.push_back(rGraph.nodes[0]);
+    for(int i = 1; i < rGraph.n; i++){
+        if(rGraph.nodes[i].parent != 0){
+            graph.nodes.push_back(rGraph.nodes[i]);
+            for(auto edge: rGraph.nodes[i].adj){
+                if(edge.duration != 0){
+                    graph.addEdge(i,edge.dest,edge.capacity,edge.duration);
+                }
+            }
+            graph.n++;
+        }
+    }
+
     cout << "ES: " << graph.cpm() << endl;
 }
 
 void Manager::scenario2_5(Graph graph) {
+    Graph rGraph(routes.n);
+    routes.edmondsKarp(rGraph,1, graph.getNumNodes());
+    graph.nodes.push_back(rGraph.nodes[0]);
+    for(int i = 1; i < rGraph.n; i++){
+        if(rGraph.nodes[i].parent != 0){
+            graph.nodes.push_back(rGraph.nodes[i]);
+            for(auto edge: rGraph.nodes[i].adj){
+                if(edge.duration != 0){
+                    graph.addEdge(i,edge.dest,edge.capacity,edge.duration);
+                }
+            }
+            graph.n++;
+        }
+    }
     unsigned delay = graph.cpmDelay();
     stack<unsigned> stops = graph.getNodesDelay(delay);
     cout << "Delay: " << delay << endl;
     cout << "Stops: ";
     while (!stops.empty()){
-        cout << stops.top() << " ";
+        cout << graph.nodes[stops.top()].stopName << " ";
         stops.pop();
     }
     cout << endl;

@@ -27,9 +27,9 @@ class Graph {
         unsigned parent;
         unsigned lot;
         unsigned degree;
-
         unsigned latestArr;
         unsigned earliestArr;
+        unsigned stopName;
 
     };
 

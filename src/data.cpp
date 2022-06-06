@@ -28,6 +28,9 @@ Graph Data::loadGraph(int numberFile) {
         graph.addEdge(src, dest, capacity, duration);
         counter++;
     }
+    for(int i=1; i <= numNodes; i++){
+        graph.nodes[i].stopName = i;
+    }
     file.close();
     return graph;
 }

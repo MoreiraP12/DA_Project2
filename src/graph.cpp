@@ -206,7 +206,7 @@ unsigned Graph::cpm() {
     }
 
     stack<unsigned> s;
-    for(unsigned v = 1; v<=n;v++)
+    for(unsigned v = 1; v <= n; v++)
         if(nodes[v].degree == 0) s.push(v);
 
     unsigned durMin = 0;

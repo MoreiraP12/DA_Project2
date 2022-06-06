@@ -283,7 +283,7 @@ Menu *Scenario2_4::getNextMenu() {
         return invalidOption();
     }
 
-    Graph tempGraph = data.loadGraph(12);
+    Graph tempGraph;
 
     manager.scenario2_4(tempGraph);
     input::waitEnter();
