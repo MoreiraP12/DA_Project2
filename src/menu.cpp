@@ -267,25 +267,7 @@ void Scenario2_4::show() {
 }
 
 Menu *Scenario2_4::getNextMenu() {
-    unsigned origin, destination;
-    cout << "Origin? " << endl;
-    if(!input::get(origin)){
-        return invalidOption();
-    }
-    if(!(origin >= 1 && origin <= manager.getNumNodes())){
-        return invalidOption();
-    }
-    cout << endl << "Destination? " << endl;
-    if(!input::get(destination)){
-        return invalidOption();
-    }
-    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
-        return invalidOption();
-    }
-
-    Graph tempGraph = data.loadGraph(12);
-
-    manager.scenario2_4(tempGraph);
+    manager.scenario2_4();
     input::waitEnter();
     return nullptr;
 }
@@ -300,25 +282,7 @@ void Scenario2_5::show() {
 }
 
 Menu *Scenario2_5::getNextMenu() {
-    unsigned origin, destination;
-    cout << "Origin? " << endl;
-    if(!input::get(origin)){
-        return invalidOption();
-    }
-    if(!(origin >= 1 && origin <= manager.getNumNodes())){
-        return invalidOption();
-    }
-    cout << endl << "Destination? " << endl;
-    if(!input::get(destination)){
-        return invalidOption();
-    }
-    if(!(destination >= 1 && destination <= manager.getNumNodes()) || destination == origin){
-        return invalidOption();
-    }
-
-    Graph tempGraph = data.loadGraph(12);
-
-    manager.scenario2_5(tempGraph);
+    manager.scenario2_5();
     input::waitEnter();
     return nullptr;
 }

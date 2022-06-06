@@ -122,13 +122,13 @@ void Manager::scenario2_3(unsigned src, unsigned dest) {
 
 }
 
-void Manager::scenario2_4(Graph graph) {
-    cout << "ES: " << graph.cpm() << endl;
+void Manager::scenario2_4() {
+    cout << "ES: " << routes.cpm() << endl;
 }
 
-void Manager::scenario2_5(Graph graph) {
-    unsigned delay = graph.cpmDelay();
-    stack<unsigned> stops = graph.getNodesDelay(delay);
+void Manager::scenario2_5() {
+    unsigned delay = routes.cpmDelay();
+    stack<unsigned> stops = routes.getNodesDelay(delay);
     cout << "Delay: " << delay << endl;
     cout << "Stops: ";
     while (!stops.empty()){
