@@ -104,14 +104,15 @@ bool Graph::auxbfs(Graph &rGraph, int s, int t)
 
         for(Edge& edge: rGraph.nodes[u].adj){
             if (rGraph.nodes[edge.dest].visited  == false && edge.capacity > 0) {
-                q.push(edge.dest);
-                rGraph.nodes[edge.dest].parent = u;
-                rGraph.nodes[edge.dest].visited = true;
                 if(edge.dest == t){
+                    rGraph.nodes[edge.dest].parent = u;
                     return true;
                 }
-            }
+                rGraph.nodes[edge.dest].parent = u;
+                rGraph.nodes[edge.dest].visited = true;
+                q.push(edge.dest);
 
+            }
         }
     }
 
